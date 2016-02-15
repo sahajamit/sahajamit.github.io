@@ -4,12 +4,16 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+I am a Test Automation Enthusiast who is highly passionate about test automation. I have more than 10 years of experience in this field and have worked on various tools and technologies including QTP, IBM RFT, Selenium WebDriver, Ranorex, Appium, Robotium, Calabash, JMeter and many more.
+
+My primary area of interest in Mobile Automation, API Automation and Prod Performance Testing and Monitoring. 
+
+These days I am exploring lot of DevOps related technologies like Docker, AWS, Ansible etc.
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+I strongly believe in sharing knowledge and that's the reason I have started this blog where I would be sharing my experiences with different tools and technologies. 
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[sahajamit@gmail.com](mailto:sahajamit@gmail.com)
