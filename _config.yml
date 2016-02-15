@@ -47,13 +47,13 @@ url: http://sahajamit.github.io
 # (http://yourusername.github.io/repository-name)
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
-baseurl: ""
+baseurl: "http://sahajamit.github.io"
 
 #
 # !! You don't need to change any of the configuration flags below !!
 #
 
-markdown: redcarpet
+markdown: kramdown
 highlighter: pygments
 permalink: /:title/
 
