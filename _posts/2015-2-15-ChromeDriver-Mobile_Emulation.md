@@ -10,15 +10,3 @@ This feature is really handy to run your selenium tests against different mobile
 This is how we can emulate different devices using the Java code.
 
 {% gist cca0ca97b76240bcaa81 %}
-
-abc
-```java
-@CucumberOptions(features = "src/test/resources/com.cucumber.testng.examples/date_calculator1.feature", 
-plugin = "json:target/cucumber2.json")
-public class RunCukesByCompositionGrp1_Test2 {
-    @Test(groups = "examples-testng", description = "Example of using TestNGCucumberRunner to invoke Cucumber")
-    public void runCukes() {
-        new TestNGCucumberRunner(getClass()).runCukes();
-    }
-}
-```
