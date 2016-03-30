@@ -20,7 +20,8 @@ public class RunCukesTest {
 }
 ```
 
-I have created a [sample project](https://github.com/sahajamit/cucumber-jvm-testng-integration) on Github to demonstrate this integration and can be referred to see the complete code.
+Contrary to JUnit, TestNG integration is not that straigh forward. 
+**I have created a [sample project](https://github.com/sahajamit/cucumber-jvm-testng-integration) on Github to demonstrate this integration and can be referred to see the complete code.**
 There are three ways to integrate your cucumber tests with TestNG. I will cover all three in detail along with its benefits. 
 
 # 1. Using AbstractTestNGCucumberTests Class #
@@ -108,3 +109,12 @@ public class RunCukesByFeatureAndCompositionTest1 {
     }
 }
 ```
+# Executing the Cucumber Feature Files in Prallel. #
+
+To Execute the cucumber features in parallel we can leverage the TestNg multi-threading feature. To accomplish this We can devide the all the feature files in multiple directories and then we can create multiple FeatureAndCompositionTest classes where each class is pointing to a specific feature folder. 
+**The following example can make this more clear.**
+
+Here are the two features files I have to run parallelly.
+
+![_config.yml]({{ site.baseurl }}/images/features.png)
+
