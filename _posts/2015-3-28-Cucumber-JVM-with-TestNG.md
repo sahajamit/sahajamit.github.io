@@ -3,7 +3,7 @@ layout: post
 title: Integrating Cucumber-JVM with TestNG
 ---
 
-Cucumber-JVM has a native integration with JUnit to run the BDD scenarios. Junit is a framework which is more popular among developers to support their unit testing. When we talk about function automation testing then TestNG is a better choice as it has more advanced features.In this blog I will be taking more about the Cucumber-JVM and TestNG Integration. 
+Cucumber-JVM has a native integration with JUnit to run the BDD scenarios. Junit is a framework which is more popular among developers to support their unit testing. When we talk about function automation testing then TestNG is a better choice as it has more advanced features. In this blog I will be taking more about the Cucumber-JVM and TestNG Integration. 
 
 With JUnit, the integration is quite straight forward, we simply need to create a test runner class like this.
 
@@ -20,7 +20,7 @@ public class RunCukesTest {
 }
 ```
 
-Contrary to JUnit, TestNG integration is not that straigh forward. 
+Contrary to JUnit, TestNG integration is not that straight forward. 
 **I have created a [sample project](https://github.com/sahajamit/cucumber-jvm-testng-integration) on Github to demonstrate this integration and can be referred to see the complete code.**
 There are three ways to integrate your cucumber tests with TestNG. I will cover all three in detail along with its benefits. 
 
@@ -109,9 +109,9 @@ public class RunCukesByFeatureAndCompositionTest1 {
     }
 }
 ```
-# Executing the Cucumber Feature Files in Prallel using TestNG. #
+# Executing the Cucumber Feature Files in Parallel using TestNG. #
 
-To Execute the cucumber features in parallel we can leverage the TestNg multi-threading feature. To accomplish this We can devide the all the feature files in multiple directories and then we can create multiple FeatureAndCompositionTest classes where each class is pointing to a specific feature folder. 
+To Execute the cucumber features in parallel we can leverage the TestNg multi-threading feature. To accomplish this we can divide all the feature files in multiple directories and then we can create multiple FeatureAndCompositionTest classes where each class is pointing to a specific feature folder. 
 **The following example can make this more clear.**
 
 Here are the two features files I have to run parallelly.
@@ -162,7 +162,7 @@ public class RunCukesByFeatureAndCompositionTest1 {
 
 ```
 
-**RunCukesByFeatureAndCompositionTest1** 
+**RunCukesByFeatureAndCompositionTest2** 
 
 ```java
 package com.cucumber.testng.examples;
@@ -205,7 +205,7 @@ public class RunCukesByFeatureAndCompositionTest2 {
 
 ```
 **Invoking the execution from testng.xml**
-One more important thing to be noticed here that in the CucumberOptions we have given different names to the cucmber results json file. This way the results for these two chuck of features files will be saved separately. Now we will execute these two features using TestNG in parallel. Here is the testng.xml which will will invoke two threads and run these features independently.
+One more important thing to be noticed here that in the CucumberOptions we have given different names to the cucmber results json file. This way the results for these two features files will be saved separately. Now we will execute these two features using TestNG in parallel. Here is the testng.xml which will will invoke two threads and run these features independently.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -280,7 +280,7 @@ public class GenerateReport {
 ```
 
 # Outro  #
-So to tie up all the pieces which we discussed in this blog, [here](https://github.com/sahajamit/cucumber-jvm-testng-integration/blob/master/testng.xml) is the complete source code on Github which can be referred. In this blog we have seen how to run the cucumber feature files in parallel using testng.
+So to tie up all the pieces which we discussed in this blog, [here](https://github.com/sahajamit/cucumber-jvm-testng-integration/blob/master/testng.xml) is the complete source code on Github which can be referred. In this blog we have seen how to run the cucumber feature files in parallel using testng. Please feel free to reach me in case of any questions or feedback. 
 
 
 
