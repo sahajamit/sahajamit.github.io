@@ -59,7 +59,7 @@ import cucumber.api.testng.TestNGCucumberRunner;
 import org.testng.annotations.Test;
 
 @CucumberOptions(plugin = "json:target/cucumber-report-composite.json")
-public class RunCukesByCompositionTest extends RunCukesByCompositionBase {
+public class RunCukesByCompositionTest {
 
     @Test(groups = "examples-testng", description = "Example of using TestNGCucumberRunner to invoke Cucumber")
     public void runCukes() {
@@ -280,7 +280,7 @@ public class GenerateReport {
 ```
 
 # Outro  #
-So to tie up all the pieces which we discussed in this blog, [here](https://github.com/sahajamit/cucumber-jvm-testng-integration/blob/master/testng.xml) is the complete source code on Github which can be referred. In this blog we have seen how to run the cucumber feature files in parallel using testng. Please feel free to reach me in case of any questions or feedback. 
+So to tie up all the pieces which we discussed in this blog, [here](https://github.com/sahajamit/cucumber-jvm-testng-integration) is the complete source code on Github which can be referred. In this blog we have seen how to run the cucumber feature files in parallel using testng. Please feel free to reach me in case of any questions or feedback. 
 
 
 
