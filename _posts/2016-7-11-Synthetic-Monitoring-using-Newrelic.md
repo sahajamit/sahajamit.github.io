@@ -3,7 +3,7 @@ layout: post
 title: Synthetic Monitoring using Newrelic
 ---
 
-Prod Monitoring is undoubtedly an emerging area and some of the leading players ihis space are Newrelic, Appdynamics, Compuware and Soasta. Before we delve in to this topic more deeper, I would like to give some background on prod monitoring.
+Prod Monitoring is undoubtedly an emerging area and some of the leading players in this space are Newrelic, Appdynamics, Compuware and Soasta. Before we delve in to this topic more deeper, I would like to give some background on prod monitoring.
 
 Primarily there are two types of Prod Monitoring:
 
