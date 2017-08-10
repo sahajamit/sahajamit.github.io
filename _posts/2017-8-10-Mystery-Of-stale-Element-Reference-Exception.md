@@ -73,6 +73,8 @@ WebElement refreshedElement = StaleElementUtils.refreshElement(elem2);
 
 This refreshElement method will check if the element is stale then it will re-fetch the element from the dom. So for all the data grid elements which can get stale anytime, we can use this method as a precautionary measure to avoid stale element exception.
 
+Please feel free to share your thoughts on my approach and would love to know, how you have handled this interesting exception.
+
 Here is the complete code:
 
 https://gist.github.com/sahajamit/f94d0094f35cd63deb21c45328ab5b47
