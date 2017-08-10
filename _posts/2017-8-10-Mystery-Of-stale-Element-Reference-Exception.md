@@ -5,7 +5,7 @@ title: Mystery Of StaleElementReference Exception in Selenium WebDriver
 
 If you are a Selenium developer than you would have surely faced this mysterious exception called "**StaleElementReferenceException**"
 
-Why exactly it comes? This has been my favorite interview questions since last many years and most of the time candidates gets confused it with NoSuchElementException. If you have never worked on a dynamic ajax based application then there could be a chance that you have never faced it. 
+Why exactly it comes? This has been my favorite interview question since last many years and most of the time candidates gets confused it with NoSuchElementException. If you have never worked on a dynamic ajax based application then there could be a chance that you have never faced it. 
 
 Let's go little deeper and see why exactly it happens. When we run a simple code like this:
 
@@ -25,13 +25,12 @@ To overcome this problem, the only choice we have is to re-fetch the element fro
 So from the above example what we understood is that if we are working with a AJAX-heavy application where page's dom can get changed on every interaction then it is wise to fetch the web elements every time when we are operating on them. There are couple of ways to make sure, the element always gets refreshed before we use it:
 
 - ## [Page Factory Design Pattern](https://github.com/SeleniumHQ/selenium/wiki/PageFactory) : ##
-------------------------------------------------------------------------
 
  
  Please refer the below code.
  
  ```java
-LoginPage loginPage = PageFactory.initElements(driver,LoginPage.class);
+GoogleSearchPage page = PageFactory.initElements(driver,GoogleSearchPage.class);
 ```
 
 ```java
@@ -46,13 +45,12 @@ public class GoogleSearchPage {
 In the above example, a proxy would be configured for every Web Element when the page gets initialised. Every time we use a WebElement it will go and find it again so we shouldn't see StaleElementException. This approach would solve your stale element problem at most of the places except some corner cases which I will cover in the next approach.
 
 - ## Refreshing the Element whenever it gets stale ##
----------------------------------------------------
 
 When you work on a modern reactive real-time application developed in technologies like Angular/React which has hell lot of data and there is a persistent web-socket connection which keep pushing data to your browser and which changes your dom.  Let's take a example of a stock exchange where there a data grid which displays real-time information and data keeps changing too frequently. In this case, whenever the data gets changed at server-side, the changes will be pushed automatically to your UI grid and depending on your data your respective rows or cells will get stale. 
 
 Here, Page factory can not help as most of your grid elements are dynamic and you cannot configure their locators while initiliazing your page. Also if you have created your own data model to prase data, than it is difficult to configure Page Factory accross all your data model classes.
 
-To deal with this problem I decided to develop a generic method to refresh the element in case it gets stale. To refresh a element, we first need to figure out its By locator but Selenium API has not exposed anything to re-enginner the locator from an existing web element. I was fortunate that they have exposed a toString method on WebElement which print all the locators being used to build that element. Let's see this example:
+To deal with this problem I decided to develop a generic method to refresh the element in case it gets stale. To refresh a element, we first need to figure out its By locator but Selenium API has not exposed anything to re-construct the locator from an existing web element. I was fortunate that they have exposed a toString method on WebElement which print all the locators being used to build that element. Let's see this example:
 
 ```java
 WebElement elem1 = driver.findElement(By.xpath("//div[@id='searchform']"));
@@ -61,8 +59,9 @@ System.out.println(elem2.toString());
 ```
 
 **Output would be:**
-
-"[[[[ChromeDriver: chrome on XP (bd6a0d83229c67d5f7e6060b1bd768e9)] -> xpath: //div[@id='searchform']]] -> css selector: input[name='q']"
+```
+[[[[ChromeDriver: chrome on XP (bd6a0d83229c67d5f7e6060b1bd768e9)] -> xpath: //div[@id='searchform']]] -> css selector: input[name='q']
+```
 
 Now we have to apply all the reverse-engineering to build the element again from this String. Thanks to [Reflection API in Java](https://docs.oracle.com/javase/tutorial/reflect/) which can help us to dynamically execute the code to build the element.
 
