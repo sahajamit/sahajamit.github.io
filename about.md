@@ -4,11 +4,11 @@ title: About
 permalink: /about/
 ---
 
-I am a Test Automation Enthusiast who is highly passionate about test automation. I have more than 10 years of experience in this field and have worked on various tools and technologies including QTP, IBM RFT, Selenium WebDriver, Ranorex, Appium, Robotium, Calabash, JMeter and many more.
+I am a Test Automation Enthusiast who is highly passionate about QA test automation. I have more than 11 years of experience in this field and have worked on various tools and technologies including Java, Selenium WebDriver, Nodejs, Angular, Hadoop, Spark, Cucumber, Appium, JMeter and many more.
 
-My primary area of interest is Mobile Automation, API Automation and Prod Performance Testing and Monitoring. 
+My primary area of interest is Web/Mobile Automation, Big Data Testing, API Automation and  Performance Testing & Prod Monitoring. 
 
-These days I am exploring lot of DevOps related technologies like Docker, AWS, Ansible etc.
+These days I am exploring lot of Big Data Technologies like Hadoop, Spark, Kafka etc.
 
 ### More Information
 
