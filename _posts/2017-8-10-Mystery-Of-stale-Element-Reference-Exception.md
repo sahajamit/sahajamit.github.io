@@ -7,7 +7,7 @@ If you are a Selenium developer than you would have surely faced this mysterious
 
 Why exactly it occurs? This has been my favorite interview question since last many years and most of the time candidates gets confused it with NoSuchElementException. In case you have never worked on a dynamic ajax based application then there could be a chance that you have never faced it. 
 
-Let's go little deeper and unviels the mystery behind it. When we run a simple code like this:
+Let's go little deeper and unveils the mystery behind it. When we run a simple code like this:
 
 ```java
 WebElement searchBox = driver.findElement(By.cssSelector("input[name='q'"));
