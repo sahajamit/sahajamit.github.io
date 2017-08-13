@@ -13,6 +13,17 @@
     
     <item>
       <title>Mystery of StaleElementReferenceException in Selenium WebDriver</title>
+      <link>http://sahajamit.com/mystery-of-stale-element-reference-exception/</link>
+      <pubDate>Fri, 28 Jul 2017 09:32:45 -0400</pubDate>
+      
+      <guid>http://sahajamit.com/mystery-of-stale-element-reference-exception/</guid>
+      <description>If you are a Selenium developer than you would have surely faced this mysterious exception called &amp;ldquo;StaleElementReferenceException&amp;ldquo;
+Why exactly it occurs? This has been my favorite interview question since last many years and most of the time candidates gets confused it with NoSuchElementException. In case you have never worked on a dynamic ajax based application then there could be a chance that you have never faced it.
+Let&amp;rsquo;s go little deeper and unveils the mystery behind it.</description>
+    </item>
+    
+    <item>
+      <title>Mystery of StaleElementReferenceException in Selenium WebDriver</title>
       <link>http://sahajamit.com/post/mystery-of-stale-element-reference-exception/</link>
       <pubDate>Fri, 28 Jul 2017 09:32:45 -0400</pubDate>
       
