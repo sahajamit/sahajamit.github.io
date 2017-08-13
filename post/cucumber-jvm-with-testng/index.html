@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Integrating cucumber-JVM with TestNG">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2016-08-28">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="http://sahajamit.com/post/cucumber-jvm-with-testng/">
+    <meta property="og:site_name" content="Moving With Automation">
+    
+    <meta property="og:tags" content="blog">
+    
+    <meta property="og:tags" content="selenium">
+    
+    <meta name="generator" content="Hugo 0.25.1" />
+    <title>Integrating cucumber-JVM with TestNG &middot; Moving With Automation</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="http://sahajamit.com/css/style.css">
+    
+    <link href="http://sahajamit.com/index.xml" rel="alternate" type="application/rss+xml" title="Moving With Automation" />
+    
+    
+    <link rel="icon" href="http://sahajamit.com/favicon.ico" />
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://sahajamit.com/">Moving With Automation</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+					<li><a href="http://sahajamit.com/about">About</a></li>
+				
+					<li><a href="http://sahajamit.com/post/">Blog</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://sahajamit.com/">Moving With Automation</a></h1>
+		
+		
+		
+			<small class="text-center center-block">MY Test Automation Journey</small>
+		
+		
+		
+			<img id="profile-pic" src="http://sahajamit.com//img/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://github.com/sahajamit"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://www.twitter.com/sahajamit"><i class="fa fa-twitter fa-2x"></i></a>
+			
+				<a href="https://www.linkedin.com/in/amit-rawat-3530566"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href=""><i class="fa fa- fa-2x"></i></a>
+			
+
+			<a href="mailto:sahajamit@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+				<a href="http://sahajamit.com/about">About</a>
+			
+				<a href="http://sahajamit.com/post/">Blog</a>
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Integrating cucumber-JVM with TestNG</h1>
+	</header>
+
+	<article>
+		
+
+<p>Cucumber-JVM has a native integration with JUnit to run the BDD scenarios. Junit is a framework which is more popular among developers to support their unit testing. When we talk about function automation testing then TestNG is a better choice as it has more advanced features. In this blog I will be taking more about the Cucumber-JVM and TestNG Integration.</p>
+
+<p>With JUnit, the integration is quite straight forward, we simply need to create a test runner class like this.</p>
+
+<pre><code class="language-java">package com.cucumber.testng.examples;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(plugin = &quot;json:target/cucumber-report.json&quot;)
+public class RunCukesTest {
+}
+</code></pre>
+
+<p>Contrary to JUnit, TestNG integration is not that straight forward.
+<strong>I have created a <a href="https://github.com/sahajamit/cucumber-jvm-testng-integration">sample project</a> on Github to demonstrate this integration and can be referred to see the complete code.</strong>
+There are three ways to integrate your cucumber tests with TestNG. I will cover all three in detail along with its benefits.</p>
+
+<h1 id="1-using-abstracttestngcucumbertests-class">1. Using AbstractTestNGCucumberTests Class</h1>
+
+<p>This is more like JUnit Integration where we are creating a simple &ldquo;RunCukesTest&rdquo; class and extending it with AbstractTestNGCucumberTests. Unlike JUnit, here there is no need to specify the test runner explicitly as be default AbstractTestNGCucumberTests class will use TestNG to execute the scenarios.</p>
+
+<p><strong>Here is the sample code.</strong></p>
+
+<pre><code class="language-java">package com.cucumber.testng.examples;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+
+@CucumberOptions(features = &quot;src/test/resources/com.cucumber.testng.examples/date_calculator1.feature&quot;, format = { &quot;pretty&quot;,
+        &quot;html:target/site/cucumber-pretty&quot;,
+        &quot;rerun:target/rerun.txt&quot;,
+        &quot;json:target/cucumber1.json&quot; })
+public class RunCukesTest extends AbstractTestNGCucumberTests {
+}
+</code></pre>
+
+<p>The CucumberOptions can be used same as JUnit. In the above example we are pointing to a specific feature file but here we can also point to a folder which has all the feature files.</p>
+
+<h1 id="2-run-scenarios-as-composition-test">2. Run scenarios as composition test:</h1>
+
+<p>In this approach the test does not inherit from AbstractTestNGCucumberTests. We will create one test method in this class, that will be invoked by TestNG and invoke the cucumber runner within that method. In this approach we can easily call this testng method from testng.xml and can also use maven to trigger the execution.</p>
+
+<p><strong>Here is the sample code.</strong></p>
+
+<pre><code class="language-java">package com.cucumber.testng.examples;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.TestNGCucumberRunner;
+import org.testng.annotations.Test;
+
+@CucumberOptions(plugin = &quot;json:target/cucumber-report-composite.json&quot;)
+public class RunCukesByCompositionTest {
+
+    @Test(groups = &quot;examples-testng&quot;, description = &quot;Example of using TestNGCucumberRunner to invoke Cucumber&quot;)
+    public void runCukes() {
+        new TestNGCucumberRunner(getClass()).runCukes();
+    }
+}
+</code></pre>
+
+<h1 id="3-run-scenarios-as-feature-and-composition-test">3. Run scenarios as feature and composition test:</h1>
+
+<p>In this approach test class does not inherit from AbstractTestNGCucumberTests but still executes each feature as a separate TestNG test. Here we have leveraged the TestNG DataProvider feature which can read all the feature files in file directory and provide it to the testng method. This way each cucumber feature can be executed as an independent TestNg test.</p>
+
+<p><strong>Here is the sample code.</strong></p>
+
+<pre><code class="language-java">package com.cucumber.testng.examples;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.TestNGCucumberRunner;
+import cucumber.api.testng.CucumberFeatureWrapper;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+@CucumberOptions(features = &quot;src/test/resources/com.cucumber.testng.examples/date_calculator1.feature&quot;, plugin = &quot;json:target/cucumber1.json&quot;)
+public class RunCukesByFeatureAndCompositionTest1 {
+    private TestNGCucumberRunner testNGCucumberRunner;
+
+    @BeforeClass(alwaysRun = true)
+    public void setUpClass() throws Exception {
+        testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+    }
+
+    @Test(groups = &quot;cucumber&quot;, description = &quot;Runs Cucumber Feature&quot;, dataProvider = &quot;features&quot;)
+    public void feature(CucumberFeatureWrapper cucumberFeature) {
+        testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
+    }
+
+    @DataProvider
+    public Object[][] features() {
+        return testNGCucumberRunner.provideFeatures();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDownClass() throws Exception {
+        testNGCucumberRunner.finish();
+    }
+}
+</code></pre>
+
+<h1 id="executing-the-cucumber-feature-files-in-parallel-using-testng">Executing the Cucumber Feature Files in Parallel using TestNG.</h1>
+
+<p>To Execute the cucumber features in parallel we can leverage the TestNg multi-threading feature. To accomplish this we can divide all the feature files in multiple directories and then we can create multiple FeatureAndCompositionTest classes where each class is pointing to a specific feature folder.
+<strong>The following example can make this more clear.</strong></p>
+
+<p>Here are the two features files I have to run parallelly.</p>
+
+<p><img src="{{ site.baseurl }}/images/features.png" alt="_config.yml" /></p>
+
+<p>Now I will be creating two FeatureAndCompositionTest classes pointing to each of the above features. Here is the code for these classes.</p>
+
+<p><strong>RunCukesByFeatureAndCompositionTest1</strong></p>
+
+<pre><code class="language-java">package com.cucumber.testng.examples;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.TestNGCucumberRunner;
+import cucumber.api.testng.CucumberFeatureWrapper;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+@CucumberOptions(features = &quot;src/test/resources/com.cucumber.testng.examples/date_calculator1.feature&quot;, plugin = &quot;json:target/cucumber1.json&quot;)
+public class RunCukesByFeatureAndCompositionTest1 {
+    private TestNGCucumberRunner testNGCucumberRunner;
+
+    @BeforeClass(alwaysRun = true)
+    public void setUpClass() throws Exception {
+        testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+    }
+
+    @Test(groups = &quot;cucumber&quot;, description = &quot;Runs Cucumber Feature&quot;, dataProvider = &quot;features&quot;)
+    public void feature(CucumberFeatureWrapper cucumberFeature) {
+        testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
+    }
+
+    @DataProvider
+    public Object[][] features() {
+        return testNGCucumberRunner.provideFeatures();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDownClass() throws Exception {
+        testNGCucumberRunner.finish();
+    }
+}
+
+</code></pre>
+
+<p><strong>RunCukesByFeatureAndCompositionTest2</strong></p>
+
+<pre><code class="language-java">package com.cucumber.testng.examples;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.CucumberFeatureWrapper;
+import cucumber.api.testng.TestNGCucumberRunner;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+
+@CucumberOptions(features = &quot;src/test/resources/com.cucumber.testng.examples/date_calculator2.feature&quot;, plugin = &quot;json:target/cucumber2.json&quot;)
+public class RunCukesByFeatureAndCompositionTest2 {
+    private TestNGCucumberRunner testNGCucumberRunner;
+
+    @BeforeClass(alwaysRun = true)
+    public void setUpClass() throws Exception {
+        testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+    }
+
+    @Test(groups = &quot;cucumber&quot;, description = &quot;Runs Cucumber Feature&quot;, dataProvider = &quot;features&quot;)
+    public void feature(CucumberFeatureWrapper cucumberFeature) {
+        testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
+    }
+
+    @DataProvider
+    public Object[][] features() {
+        return testNGCucumberRunner.provideFeatures();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDownClass() throws Exception {
+        testNGCucumberRunner.finish();
+    }
+}
+
+</code></pre>
+
+<p><strong>Invoking the execution from testng.xml</strong>
+One more important thing to be noticed here that in the CucumberOptions we have given different names to the cucmber results json file. This way the results for these two features files will be saved separately. Now we will execute these two features using TestNG in parallel. Here is the testng.xml which will will invoke two threads and run these features independently.</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Custom suite&quot; verbose=&quot;1&quot; thread-count=&quot;1&quot; parallel=&quot;tests&quot; configfailurepolicy=&quot;continue&quot;&gt;
+    &lt;listeners&gt;
+        &lt;listener class-name=&quot;com.cucumber.testng.examples.TestNGExecutionListener&quot;&gt;&lt;/listener&gt;
+    &lt;/listeners&gt;
+    &lt;test name=&quot;Cucumber Date Calculator Test 1&quot; annotations=&quot;JDK&quot; preserve-order=&quot;true&quot;&gt;
+        &lt;classes&gt;
+            &lt;class name=&quot;com.cucumber.testng.examples.RunCukesByFeatureAndCompositionTest1&quot;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+    &lt;test name=&quot;Cucumber Date Calculator Test 2&quot; annotations=&quot;JDK&quot; preserve-order=&quot;true&quot;&gt;
+        &lt;classes&gt;
+            &lt;class name=&quot;com.cucumber.testng.examples.RunCukesByFeatureAndCompositionTest2&quot;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+&lt;/suite&gt;
+</code></pre>
+
+<h2 id="test-reporting">Test Reporting</h2>
+
+<p>In this approach it would be difficult to use the cucumber&rsquo;s native pretty html reports as we are generating two json files (cucumber1.json and cucumber2.json). So to merge these reports in a single HTML I have decided to go with <a href="https://github.com/damianszczepanik/cucumber-reporting">Masterthought</a> reporting.</p>
+
+<p>I have used TestNG&rsquo;s IExecutionListener so that our reporting code gets invoked once TestNG is done with the execution for both the threads and json report files are generated.
+<strong>Here is the code for Masterthought reporting.</strong></p>
+
+<pre><code class="language-java">package com.cucumber.testng.examples;
+
+import net.masterthought.cucumber.ReportBuilder;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by amit.rawat on 21/12/15.
+ */
+public class GenerateReport {
+    public static void GenerateMasterthoughtReport(){
+        try{
+            String RootDir = System.getProperty(&quot;user.dir&quot;);
+            File reportOutputDirectory = new File(&quot;target/Masterthought&quot;);
+            List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+            list.add(&quot;target/cucumber1.json&quot;);
+            list.add(&quot;target/cucumber2.json&quot;);
+
+            String pluginUrlPath = &quot;&quot;;
+            String buildNumber = &quot;1&quot;;
+            String buildProject = &quot;cucumber-jvm&quot;;
+            boolean skippedFails = true;
+            boolean pendingFails = true;
+            boolean undefinedFails = true;
+            boolean missingFails = true;
+            boolean flashCharts = true;
+            boolean runWithJenkins = false;
+            boolean highCharts = false;
+            boolean parallelTesting = true;
+            boolean artifactsEnabled = false;
+            String artifactConfig = &quot;&quot;;
+
+            ReportBuilder reportBuilder = new ReportBuilder(list, reportOutputDirectory, pluginUrlPath, buildNumber,
+                    buildProject, skippedFails, pendingFails, undefinedFails, missingFails, flashCharts, runWithJenkins,
+                    highCharts, parallelTesting);
+
+            reportBuilder.generateReports();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+<h1 id="outro">Outro</h1>
+
+<p>So to tie up all the pieces which we discussed in this blog, <a href="https://github.com/sahajamit/cucumber-jvm-testng-integration">here</a> is the complete source code on Github which can be referred. In this blog we have seen how to run the cucumber feature files in parallel using testng. Please feel free to reach me in case of any questions or feedback.</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://sahajamit.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "sahajamit" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-73743634-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/sahajamit.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="http://sahajamit.com//js/App.js"></script>
+  
+</body>
+</html>

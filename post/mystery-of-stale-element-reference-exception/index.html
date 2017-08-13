@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Mystery of StaleElementReferenceException in Selenium WebDriver">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-07-28">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="http://sahajamit.com/post/mystery-of-stale-element-reference-exception/">
+    <meta property="og:site_name" content="Moving With Automation">
+    
+    <meta property="og:tags" content="blog">
+    
+    <meta property="og:tags" content="selenium">
+    
+    <meta name="generator" content="Hugo 0.25.1" />
+    <title>Mystery of StaleElementReferenceException in Selenium WebDriver &middot; Moving With Automation</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="http://sahajamit.com/css/style.css">
+    
+    <link href="http://sahajamit.com/index.xml" rel="alternate" type="application/rss+xml" title="Moving With Automation" />
+    
+    
+    <link rel="icon" href="http://sahajamit.com/favicon.ico" />
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="http://sahajamit.com/">Moving With Automation</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+					<li><a href="http://sahajamit.com/about">About</a></li>
+				
+					<li><a href="http://sahajamit.com/post/">Blog</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="http://sahajamit.com/">Moving With Automation</a></h1>
+		
+		
+		
+			<small class="text-center center-block">MY Test Automation Journey</small>
+		
+		
+		
+			<img id="profile-pic" src="http://sahajamit.com//img/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://github.com/sahajamit"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://www.twitter.com/sahajamit"><i class="fa fa-twitter fa-2x"></i></a>
+			
+				<a href="https://www.linkedin.com/in/amit-rawat-3530566"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href=""><i class="fa fa- fa-2x"></i></a>
+			
+
+			<a href="mailto:sahajamit@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+				<a href="http://sahajamit.com/about">About</a>
+			
+				<a href="http://sahajamit.com/post/">Blog</a>
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Mystery of StaleElementReferenceException in Selenium WebDriver</h1>
+	</header>
+
+	<article>
+		
+
+<p>If you are a Selenium developer than you would have surely faced this mysterious exception called &ldquo;<strong>StaleElementReferenceException</strong>&ldquo;</p>
+
+<p>Why exactly it occurs? This has been my favorite interview question since last many years and most of the time candidates gets confused it with NoSuchElementException. In case you have never worked on a dynamic ajax based application then there could be a chance that you have never faced it.</p>
+
+<p>Let&rsquo;s go little deeper and unveils the mystery behind it. When we run a simple code like this:</p>
+
+<pre><code class="language-java">WebElement searchBox = driver.findElement(By.cssSelector(&quot;input[name='q'&quot;));
+searchBox.sendKeys(&quot;Selenium&quot;);
+</code></pre>
+
+<p>When WebDriver executes the above code then it assigns an internal id (refer the below image) to every web element and it refers this id to interact with that element.</p>
+
+<p><img src="/img/stale-element-1.png" alt="Example image" /></p>
+
+<p>Now, let&rsquo;s assume when you have fetched the element and before doing any action on it, something got refreshed on your page. It could be the entire page refresh or some internal ajax call which has refreshed a section of the dom where your element falls. In this scenario the internal id which webdriver was using has become stale, so now for every operation on this WebElement, we will get StaleElementReferenceException.</p>
+
+<p>To overcome this problem, the only choice we have is to re-fetch the element from Dom and this time WebDriver will assign a different Id to this element.</p>
+
+<p>So from the above example what we understood is that if we are working with an AJAX-heavy application where page&rsquo;s dom can get changed on every interaction then it is wise to fetch the web elements every time when we are operating on them. There are couple of ways to make sure, the element always gets refreshed before we use it:</p>
+
+<h2 id="page-factory-design-pattern">Page Factory Design Pattern:</h2>
+
+<p>Please refer the below code.</p>
+
+<pre><code class="language-java">GoogleSearchPage page = PageFactory.initElements(driver,GoogleSearchPage.class);
+</code></pre>
+
+<pre><code class="language-java">public class GoogleSearchPage {
+    @FindBy(how = How.NAME, using = &quot;q&quot;)
+    private WebElement searchBox;
+
+    public void searchFor(String text) {
+        searchBox.sendKeys(text);
+    }
+</code></pre>
+
+<p>In the above example, a proxy would be configured for every Web Element when the page gets initialised. Every time we use a WebElement it will go and find it again so we shouldn&rsquo;t see StaleElementException. This approach would solve your stale element problem at most of the places except some corner cases which I will cover in the next approach.</p>
+
+<h2 id="refreshing-the-element-whenever-it-gets-stale">Refreshing the Element whenever it gets stale:</h2>
+
+<p>When you work on a modern, reactive, real-time application developed in technologies like Angularjs/Reactjs which has hell lot of data and there is a persistent web-socket connection which keep pushing data to your browser and which makes your dom to change.  Let&rsquo;s take an example of a stock exchange where there a data grid which displays real-time information and data keeps changing too frequently. In this case, whenever the data gets changed at server-side, the changes will be pushed automatically to your UI grid and depending on your data your respective rows or cells will get stale.</p>
+
+<p>Here, Page factory can not help as most of your grid elements are dynamic and you cannot configure their locators while initiliazing your page. Also if you have created your own data model to prase data, than it is difficult to configure Page Factory accross all your data model classes.</p>
+
+<p>To deal with this problem I decided to develop a generic method to refresh the element in case it gets stale. To refresh an element, we first need to figure out its By locator but Selenium API has not exposed anything to re-construct the locator from an existing web element. I was fortunate that they have exposed a toString method on WebElement which print all the locators being used to build that element. Let&rsquo;s see the below example where we are finding an element which is a child of another element:</p>
+
+<pre><code class="language-java">WebElement elem1 = driver.findElement(By.xpath(&quot;//div[@id='searchform']&quot;));
+WebElement elem2 = elem1.findElement(By.cssSelector(&quot;input[name='q'&quot;));
+System.out.println(elem2.toString());
+</code></pre>
+
+<p><strong>Output of the above code would be:</strong></p>
+
+<pre><code>[[[[ChromeDriver: chrome on XP (bd6a0d83229c67d5f7e6060b1bd768e9)] -&gt; xpath: //div[@id='searchform']]] -&gt; css selector: input[name='q']
+</code></pre>
+
+<p>Now we have to apply all the reverse-engineering to build the element again from this String. Thanks to <a href="https://docs.oracle.com/javase/tutorial/reflect/">Reflection API in Java</a> which can help us to dynamically execute the code to build the element.</p>
+
+<p><strong>Here is the final implementation:</strong></p>
+
+<pre><code class="language-java">WebElement refreshedElement = StaleElementUtils.refreshElement(elem2);
+</code></pre>
+
+<p>This refreshElement method will check if the element is stale then it will re-fetch the element from the dom. So for all the data grid elements which can get stale anytime, we can use this method as a precautionary measure to avoid stale element exception.</p>
+
+<p>Please feel free to share your thoughts on my approach and would love to know, how you have handled this interesting exception.</p>
+
+<p>Here is the complete <a href="https://gist.github.com/sahajamit/f94d0094f35cd63deb21c45328ab5b47">code</a>:</p>
+
+<pre><code class="language-java">package com.sahajamit.selenium.utils;
+
+import com.sahajamit.selenium.driver.DriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
+public class StaleElementUtils {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UIUtils.class);
+    public static WebElement refreshElement(WebElement elem){
+        if(!isElementStale(elem))
+            return elem;
+        Object lastObject = null;
+        try{
+            String[] arr = elem.toString().split(&quot;-&gt;&quot;);
+            List&lt;String&gt; newStr = new ArrayList&lt;String&gt;();
+            for(String s:arr){
+                String newstr = s.trim().replaceAll(&quot;^\\[+&quot;, &quot;&quot;).replaceAll(&quot;\\]+$&quot;,&quot;&quot;);
+                String[] parts = newstr.split(&quot;: &quot;);
+                String key = parts[0];
+                String value = parts[1];
+                int leftBracketsCount = value.length() - value.replace(&quot;[&quot;, &quot;&quot;).length();
+                int rightBracketscount = value.length() - value.replace(&quot;]&quot;, &quot;&quot;).length();
+                if(leftBracketsCount-rightBracketscount==1)
+                    value = value + &quot;]&quot;;
+                if(lastObject==null){
+                    lastObject = DriverManager.getDriver();
+                }else{
+                    lastObject = getWebElement(lastObject, key, value);
+                }
+            }
+        }catch(Exception e){
+            LOGGER.error(&quot;Error in Refreshing the stale Element.&quot;);
+        }
+        return (WebElement)lastObject;
+    }
+
+    public static boolean isElementStale(WebElement e){
+        try{
+            e.isDisplayed();
+            return false;
+        }catch(StaleElementReferenceException ex){
+            return true;
+        }
+    }
+
+    private static WebElement getWebElement(Object lastObject, String key, String value){
+        WebElement element = null;
+        try {
+            By by = getBy(key,value);
+            Method m = getCaseInsensitiveDeclaredMethod(lastObject,&quot;findElement&quot;);
+            element = (WebElement) m.invoke(lastObject,by);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return element;
+    }
+
+    private static By getBy(String key, String value) throws InvocationTargetException, IllegalAccessException {
+        By by = null;
+        Class clazz = By.class;
+        String methodName = key.replace(&quot; &quot;,&quot;&quot;);
+        Method m = getCaseInsensitiveStaticDeclaredMethod(clazz,methodName);
+        return (By) m.invoke(null,value);
+    }
+    private static Method getCaseInsensitiveDeclaredMethod(Object obj, String methodName) {
+        Method[] methods = obj.getClass().getMethods();
+        Method method = null;
+        for (Method m : methods) {
+            if (m.getName().equalsIgnoreCase(methodName)) {
+                method = m;
+                break;
+            }
+        }
+        if (method == null) {
+            throw new IllegalStateException(String.format(&quot;%s Method name is not found for this Class %s&quot;, methodName, obj.getClass().toString()));
+        }
+        return method;
+    }
+    private static Method getCaseInsensitiveStaticDeclaredMethod(Class clazz, String methodName) {
+        Method[] methods = clazz.getMethods();
+        Method method = null;
+        for (Method m : methods) {
+            if (m.getName().equalsIgnoreCase(methodName)) {
+                method = m;
+                break;
+            }
+        }
+        if (method == null) {
+            throw new IllegalStateException(String.format(&quot;%s Method name is not found for this Class %s&quot;, methodName, clazz.toString()));
+        }
+        return method;
+    }
+}
+</code></pre>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" http://sahajamit.com/" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "sahajamit" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-73743634-1', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "http:\/\/sahajamit.com\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="http://sahajamit.com//js/App.js"></script>
+  
+</body>
+</html>
