@@ -1,0 +1,23 @@
+.hg-body-container {
+    @media screen and (min-width: $mobile-break) {
+        margin-left: 20%;
+    }
+
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .hg-body {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
+.hidden-mobile {
+    display: initial;
+    
+    @media screen and (min-width: $mobile-break) {
+        display: none;
+    }
+}

@@ -1,0 +1,41 @@
+$green: #96CA2D;
+$lt-green: #B5E655;
+$white: #FAFAFA;
+$lt-blue: #BDD4DE;
+$blue: #4b79ce;
+$red: #f3534e;
+$black: #2d4054;
+$grey: #A5ADB2;
+$lt-grey: #ECECEC;
+$rss: #F90;
+
+$xs-break: 24em;
+$mobile-break: 48em;
+$tablet-break: 64em;
+$desktop-break: 80em;
+
+$browser-context: 16;
+$base-size: rem(16px);
+$bg-color: $white;
+$text-color: $black;
+$light-text: lighten($black, 35%);
+
+$well-border: #c2ccd2;
+$well-background: lighten($lt-grey, 4%);
+
+$font-sans: 'Roboto', 'Arial', sans-serif;
+$font-mono: 'Source Code Pro', monospace;
+$font-size: $base-size;
+$font-color: $black;
+$link-color: $blue;
+$link-hover: $lt-blue;
+
+$sidebar-color: $black;
+$sidebar-top-border: $red;
+$sidebar-text-color: $lt-blue;
+
+$border-radius: 0.5rem;
+$box-shadow: 2px 2px 5px #808080;
+
+$header-font: 'Oswald', 'Arial', sans-serif;
+

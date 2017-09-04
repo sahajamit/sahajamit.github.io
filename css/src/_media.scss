@@ -1,0 +1,43 @@
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+figure {
+
+    img {
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: $border-radius;
+        border: 1px solid $well-border;
+        box-shadow: $box-shadow;
+    }
+
+    .hg-thumbnail {
+        box-shadow: none !important;
+        border: none;
+        border-radius: none;
+    }
+
+    figcaption {
+        font-size: 0.9rem;
+        color: $light-text;
+        text-align: center;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+.twitter-tweet, .instagram-media {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 1rem !important;
+}
