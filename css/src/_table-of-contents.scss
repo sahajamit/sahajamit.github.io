@@ -1,0 +1,29 @@
+.hg-toc {
+    float: left;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+
+    #TableOfContents {
+        ul {
+            padding-left: 0.5rem;
+
+            li {
+                margin-top: 0.5rem;
+            }
+        }
+    }
+
+    .hg-toc-label {
+        font-family: $header-font;
+        font-size: 120%;
+    }
+}
+
+.hg-sidebar .hg-toc {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    float: none;
+}

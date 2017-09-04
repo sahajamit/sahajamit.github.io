@@ -1,0 +1,110 @@
+@mixin header {
+    font-family: $header-font;
+    font-weight: 300;
+    margin: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem
+}
+
+h1 {
+    font-size: 2.5rem;
+    @include header;
+}
+
+h2 {
+    font-size: 2rem;
+    @include header;
+}
+
+h3 {
+    font-size: 1.75rem;
+    @include header;
+}
+
+h4 {
+    font-size: 1.5rem;
+    @include header;
+}
+
+h5 {
+    font-size: 1.25rem;
+    @include header;
+}
+
+h6 {
+    font-size: 1rem;
+    @include header;
+}
+
+header {
+    @include header;
+    
+    p {
+        font-size: 1.2rem;
+    }
+}
+
+p {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover {
+        color: $link-hover;
+    }
+}
+
+code {
+    font-family: $font-mono;
+}
+
+p code, li code {
+    background: $lt-grey;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+}
+
+pre {
+    padding: 1rem 2rem;
+    border-left: rem(5px) solid $well-border;
+    background: $well-background;
+
+    code {
+        font-size: 0.9rem;
+        background: inherit !important;
+    }
+}
+
+blockquote {
+    margin-left: 0;
+    padding-left: 2rem;
+    border-left: rem(5px) solid $lt-grey;
+}
+
+p, li, blockquote {
+    line-height: 1.5rem;
+}
+
+.hg-muted {
+    color: darken($grey, 10%);
+    font-weight: lighter;
+}
+
+.hg-tag {
+    background: $red;
+    padding: .2rem .6rem .3rem;
+    margin-right: 0.7rem;
+    font-size: 0.75rem;
+    color: white;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+
+    &:first-child {
+        margin-left: 0.3rem;
+    }
+}

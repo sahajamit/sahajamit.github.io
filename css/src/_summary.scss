@@ -1,0 +1,15 @@
+.hg-summary {
+
+    .hg-summary-header {
+        font-family: $header-font;
+
+        .hg-summary-date {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .hg-summary-footer {
+        margin-top: 1rem;
+        line-height: 2rem;
+    }
+}

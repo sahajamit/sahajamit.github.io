@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="generator" content="Hugo 0.25.1" />
+
+    
+    <meta name="theme-color" content="#2d4054">
+    
+
+    <meta property="og:title" content="Getting Started With hugo-geo">
+
+    
+    <meta property="og:locale" content="en_US" />
+    
+
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2016-03-04">
+    
+    <meta name="twitter:card" content="summary" />
+
+    <meta property="og:url" content="http://sahajamit.com/tutorial/getting-started/">
+    <meta property="og:site_name" content="Moving With Automation">
+
+    
+    <meta name="description" content="A tutorial on how to use and customize the Hugo-Geo theme">
+    <meta property="og:description" content="A tutorial on how to use and customize the Hugo-Geo theme">
+    
+    
+    
+    <meta property="og:tags" content="tutorial">
+    
+    <meta property="og:tags" content="series">
+    
+    <meta property="og:tags" content="hugo">
+    
+
+    
+    <meta name="twitter:creator" content="@sahajamit">
+    
+
+    
+    <meta name="twitter:site" content="@sahajamit">
+    
+
+    
+        
+            <meta property="og:image" content="/path/to/image">
+        
+    
+
+    
+
+    <title>Getting Started With hugo-geo &middot; Moving With Automation</title>
+
+    
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.1/pure-min.css">
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.1/grids-responsive-min.css">
+    
+    <link rel="stylesheet" href="http://sahajamit.com/css/hugo-geo.css">
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+
+    <link rel="icon" href="http://sahajamit.com/favicon.ico" />
+</head>
+<body>
+    <div id="fb-root"></div>
+    <div class="hg-container pure-g">
+        <div class="hg-mobile-nav pure-u-1">
+    <div class="hg-site-title">
+        Moving With Automation
+    </div>
+    <div class="hg-mobile-links">
+        
+            <a class="hg-sidenav-link" href="/">Blog</a>
+        
+            <a class="hg-sidenav-link" href="/about/">About Me</a>
+        
+    </div>
+</div>
+        <div class="hg-sidenav pure-u-1 pure-u-md-1-5">
+    <div class="hg-sidenav-content">
+        <div class="hg-site-title hg-sidenav-item">
+            <a href="http://sahajamit.com/">Moving With Automation</a>
+        </div>
+        
+        <div class="hg-site-subtitle hg-sidenav-item">
+            
+        </div>
+         
+
+        
+        <img class="hg-sidenav-item hg-profile-pic" src="http://sahajamit.com/img/cutmypic.png" alt="My Picture">
+        
+        <div class="hg-social hg-sidenav-item">
+            
+                <a href="https://www.twitter.com/sahajamit"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            
+                <a href="mailto:sahajamit@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+            
+                <a href="https://www.linkedin.com/in/amit-rawat-3530566"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            
+                <a href="https://github.com/sahajamit"><i class="fa fa-github" aria-hidden="true"></i></a>
+            
+        </div>
+        <div class="hg-sidenav-links hg-sidenav-item">
+            
+                <a class="hg-sidenav-link" href="/">Blog</a>
+            
+                <a class="hg-sidenav-link" href="/about/">About Me</a>
+            
+        </div>
+    </div>
+</div>
+
+        
+<div class="hg-body-container pure-u-1 pure-u-md-3-5">
+    <div class="hg-body">
+
+        <main>
+            <header>
+                <h1>Getting Started With hugo-geo</h1>
+                <p class="hg-post-date hg-muted">
+                    Published on: 4 March 2016
+                </p>
+                <p class="hg-tag-list hg-muted">
+                    
+    Tags:
+    
+    
+        <a href="http://sahajamit.com/tags/tutorial"><span class="hg-tag">tutorial</span></a>
+    
+        <a href="http://sahajamit.com/tags/series"><span class="hg-tag">series</span></a>
+    
+        <a href="http://sahajamit.com/tags/hugo"><span class="hg-tag">hugo</span></a>
+    
+
+                </p>
+                
+            </header>
+            <article>
+                <div class="hidden-mobile">
+                    
+<div class="hg-toc">
+    <h5>Table of Contents</h5>
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#the-spinning-globe">The Spinning Globe</a></li>
+<li><a href="#favicon">Favicon</a></li>
+<li><a href="#analytics">Analytics</a></li>
+<li><a href="#social-links">Social Links</a></li>
+<li><a href="#sidebar-profile-picture">Sidebar Profile Picture</a></li>
+<li><a href="#title-subtitle">Title &amp; Subtitle</a></li>
+<li><a href="#nav-links">Nav Links</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#content-front-matter">Content Front Matter</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#syntax-highlighting-with-hljs">Syntax highlighting with hljs</a></li>
+<li><a href="#custom-js-css">Custom JS/CSS</a></li>
+<li><a href="#posting-tutorials">Posting Tutorials</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+
+                </div>
+                <p>Setting up and configuring hugo-geo is as simple as changing a few values in your site <code>config.toml</code>. Lets look at this example site&rsquo;s config and go over what
+each of hugo-geo&rsquo;s site <code>[params]</code> do.</p>
+
+<p>If this guide doesn&rsquo;t answer your question it may be covered in the <a href="http://gohugo.io/overview/configuration/">Hugo documentation</a>.</p>
+
+<p></p>
+
+<pre><code class="language-toml">baseurl = &quot;http://replace-this-with-your-hugo-site.com/&quot;
+relativeURLs = false
+languageCode = &quot;en-us&quot;
+title = &quot;My New Hugo Site&quot;
+disqusShortname = &quot;shortcode-here&quot;
+paginate = 5
+
+[taxonomies]
+	tag = &quot;tags&quot;
+	tutorial = &quot;tutorials&quot;
+
+[params]
+	showglobe = true
+
+	favicon = &quot;favicon.ico&quot;
+
+	analytics = &quot;code-here&quot;
+
+	github = &quot;https://github.com/alexurquhart&quot;
+	twitter = &quot;https://twitter.com/alexanderurq&quot;
+	linkedin = &quot;https://www.linkedin.com/profile/view?id=339355941&quot;
+	email = &quot;alexurquhart@gmail.com&quot;
+	
+	profilepic = &quot;img/profile.png&quot;
+	
+	title = &quot;MY NAME&quot;
+	subtitle = &quot;MY HUGO BLOG&quot;
+	
+	[[params.navlinks]]
+	name = &quot;About&quot;
+	url = &quot;about&quot;
+	
+	[[params.navlinks]]
+	name = &quot;Blog&quot;
+	url = &quot;&quot;
+	
+	[[params.navlinks]]
+	name = &quot;Tutorials&quot;
+	url = &quot;tutorial/&quot;
+</code></pre>
+
+<h5 id="the-spinning-globe">The Spinning Globe</h5>
+
+<p><code>showglobe =  true</code></p>
+
+<p>Set this to <code>false</code> and the spinning globe in the sidebar will not be rendered.</p>
+
+<h5 id="favicon">Favicon</h5>
+
+<p><code>favicon = &quot;favicon.ico&quot;</code></p>
+
+<p>Copy your site&rsquo;s icon file to the <code>static</code> folder of your site. Delete this parameter if you don&rsquo;t wish to display a favicon.</p>
+
+<h5 id="analytics">Analytics</h5>
+
+<p>In order to remain compatible with Hugo v0.14, the analytics shortcode is specified in the site params.</p>
+
+<h5 id="social-links">Social Links</h5>
+
+<pre><code class="language-toml">github = &quot;https://github.com/alexurquhart&quot;
+twitter = &quot;https://twitter.com/alexanderurq&quot;
+linkedin = &quot;https://www.linkedin.com/profile/view?id=339355941&quot;
+email = &quot;alexurquhart@gmail.com&quot;
+</code></pre>
+
+<p>These social settings set the icon links in the sidebar. If you don&rsquo;t want to have a certain icon or link show up, simply remove it.</p>
+
+<h5 id="sidebar-profile-picture">Sidebar Profile Picture</h5>
+
+<p><code>profilepic = &quot;img/profile.png&quot;</code></p>
+
+<p>This is the path to the profile image shown in the sidebar, relative to the <code>baseurl</code></p>
+
+<h5 id="title-subtitle">Title &amp; Subtitle</h5>
+
+<p>Either of these can be removed. If the <code>title</code> param is removed, then the site <code>title</code> will be used instead.</p>
+
+<h5 id="nav-links">Nav Links</h5>
+
+<p>A customizable array of links that will appear in the sidebar, or dropdown menu when viewed on mobile. The URL is relative to the <code>baseurl</code>.</p>
+
+<h2 id="content-front-matter">Content Front Matter</h2>
+
+<p>There are few custom settings you can specify in your content front matter that will effect how hugo generates your site.</p>
+
+<h5 id="syntax-highlighting-with-hljs">Syntax highlighting with hljs</h5>
+
+<p>Set <code>highlight = true</code> in your post front matter to include <a href="https://highlightjs.org/">highlight.js</a> javascript and css.</p>
+
+<h5 id="custom-js-css">Custom JS/CSS</h5>
+
+<p>Include custom CSS and Javascript on an individual piece of content like so:</p>
+
+<pre><code class="language-toml">scripts = [
+&quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/languages/go.min.js&quot;,
+]
+
+css = [
+&quot;//cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css&quot;
+]
+</code></pre>
+
+<h5 id="posting-tutorials">Posting Tutorials</h5>
+
+<p>In order for a <code>tutorial</code> to show up on the <code>/tutorials/</code> page list, it must have <code>index = true</code> present in the front matter of the post.
+New <code>tutorial</code>&rsquo;s will not show up on the front page of the site, yet.</p>
+
+<p>Multi-paged tutorial series can be accomplished by including links to each page of the tutorial on the page with <code>index = true</code>.</p>
+            </article>
+        </main>
+
+        
+
+
+<div class="pure-g hg-bottom-nav">
+    <div class="pure-u-9-24">
+        
+            
+                <a href="http://sahajamit.com/tutorial/learn-html/">
+                    Previous: Getting Started With hugo-geo
+                </a>
+            
+        
+    </div>
+    <div class="pure-u-6-24">
+        <a href="http://sahajamit.com/">
+            Home
+        </a>
+    </div>
+    <div class="pure-u-9-24">
+        
+    </div>
+</div>
+
+        
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "sahajamit" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+    </div>
+
+    <div class="hg-footer pure-g">
+    <div class="hg-footer-socials pure-u-1">
+        <span>Contact:</span>
+        
+        <a href="https://www.twitter.com/sahajamit">Twitter</a>
+        
+        <a href="mailto:sahajamit@gmail.com">E-Mail</a>
+        
+        <a href="https://www.linkedin.com/in/amit-rawat-3530566">LinkedIn</a>
+        
+        <a href="https://github.com/sahajamit">GitHub</a>
+        
+    </div>
+    
+    <div class="pure-u-1">
+        Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> and the <a href="https://github.com/alexurquhart/hugo-geo" target="_blank">hugo-geo</a> theme
+    </div>
+    
+    
+    <div class="pure-u-1">
+        &copy; Amit Rawat 2016 - 2017
+    </div>
+    
+    
+</div> 
+
+</div>
+<div class="hg-sidebar pure-u-1 pure-u-md-1-5">
+    
+    <div class="hg-sidebar-item">
+        
+<h4></h4>
+
+    
+        <a href="http://sahajamit.com/tutorials/">
+        <h5>
+            Part 1: Tutorials
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/post/capture-javascript-errors-from-selenium/">
+        <h5>
+            Part 2: HOW TO CAPTURE JAVASCRIPT ERRORS FROM YOUR WEB APPLICATION
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/javascript/">
+        <h5>
+            Part 3: Javascript
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/post/chromedriver-mobile_emulation/">
+        <h5>
+            Part 4: Mobile Emulation In Chromedriver
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/chromedriver/">
+        <h5>
+            Part 5: Chromedriver
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/mobile/">
+        <h5>
+            Part 6: Mobile
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/">
+        <h5>
+            Part 7: Tags
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/about/">
+        <h5>
+            Part 8: About Me
+        </h5>
+        </a>
+    
+
+    
+        <h5>
+            Part 9: Getting Started With hugo-geo
+        </h5>
+    
+
+    
+        <h5>
+            Part 10: Getting Started With hugo-geo
+        </h5>
+    
+
+    
+        <a href="http://sahajamit.com/tags/hugo/">
+        <h5>
+            Part 11: Hugo
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/series/">
+        <h5>
+            Part 12: Series
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/tutorial/">
+        <h5>
+            Part 13: Tutorial
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tutorial/">
+        <h5>
+            Part 14: Tutorials
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/post/cucumber-jvm-with-testng/">
+        <h5>
+            Part 15: Integrating cucumber-JVM with TestNG
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/cucumber/">
+        <h5>
+            Part 16: Cucumber
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/testng/">
+        <h5>
+            Part 17: Testng
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/post/mystery-of-stale-element-reference-exception/">
+        <h5>
+            Part 18: Mystery of StaleElementReferenceException in Selenium WebDriver
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/java/">
+        <h5>
+            Part 19: Java
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/">
+        <h5>
+            Part 20: Moving With Automation
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/post/">
+        <h5>
+            Part 21: Posts
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/selenium/">
+        <h5>
+            Part 22: Selenium
+        </h5>
+        </a>
+    
+
+    
+        <a href="http://sahajamit.com/tags/webdriver/">
+        <h5>
+            Part 23: Webdriver
+        </h5>
+        </a>
+    
+
+
+    </div>
+    
+
+    <div class="hg-sidebar-item">
+        <a class="pure-button hg-block-btn" href="http://sahajamit.com/">
+            <i class="fa fa-home"></i>
+            Home
+        </a>
+    </div>
+
+    
+    <div class="hg-sidebar-item">
+        
+<div class="hg-toc">
+    <h5>Table of Contents</h5>
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#the-spinning-globe">The Spinning Globe</a></li>
+<li><a href="#favicon">Favicon</a></li>
+<li><a href="#analytics">Analytics</a></li>
+<li><a href="#social-links">Social Links</a></li>
+<li><a href="#sidebar-profile-picture">Sidebar Profile Picture</a></li>
+<li><a href="#title-subtitle">Title &amp; Subtitle</a></li>
+<li><a href="#nav-links">Nav Links</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#content-front-matter">Content Front Matter</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#syntax-highlighting-with-hljs">Syntax highlighting with hljs</a></li>
+<li><a href="#custom-js-css">Custom JS/CSS</a></li>
+<li><a href="#posting-tutorials">Posting Tutorials</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+
+    </div>
+    
+
+    
+    <div class="hg-sidebar-item">
+        <a class="twitter-timeline" data-height="800" href="https://twitter.com/sahajamit">Tweets by alexanderurq</a>
+    </div>
+    
+
+    
+        
+        <div class="hg-sidebar-item">
+            
+                <a href="https://m.do.co/c/78ae6b852549" target="_blank"><img src="/img/do.png" class="responsive pure-img"></a>
+            
+        </div>
+        
+        <div class="hg-sidebar-item">
+            
+                <a href="/about/" target="_blank"></a>
+            
+        </div>
+        
+    
+</div>
+
+
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.min.js"></script>
+
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+    
+
+    
+
+    
+    
+    <script src="http://sahajamit.com/js/hugo-geo.js"></script>
+
+    
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+    
+
+
+
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
+
+    
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-73743634-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</body>
+</html>

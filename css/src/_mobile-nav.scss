@@ -1,0 +1,54 @@
+.hg-mobile-nav {
+    @media screen and (min-width: $mobile-break) {
+        display: none;
+    }
+
+    @media screen and (min-width: $xs-break) {
+        .hg-site-title {
+            font-size: 2rem !important;
+        }
+
+        .hg-mobile-links {
+            font-size: 1.5rem !important;
+        }
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: rem(50px);
+
+    background: $sidebar-color;
+    font-family: $header-font !important;
+    font-weight: 300;
+    color: $sidebar-text-color !important;
+
+    border-bottom: rem(5px) solid $sidebar-top-border;
+
+    a {
+        color: $sidebar-text-color;
+        text-decoration: none;
+        &:hover {
+            color: white;
+        }
+    }
+
+    .hg-site-title {
+        margin-left: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .hg-mobile-links {
+        margin-right: 1rem;
+        text-align: center;
+        font-size: 1.1rem;
+
+        a {
+            margin-right: 0.5em;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Moving With Automation</title>
+    <link>http://sahajamit.com/tags/blog/</link>
+    <description>Recent content in Blog on Moving With Automation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 28 Jul 2017 09:32:45 -0400</lastBuildDate>
+    
+	<atom:link href="http://sahajamit.com/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mystery of StaleElementReferenceException in Selenium WebDriver</title>
+      <link>http://sahajamit.com/mystery-of-stale-element-reference-exception/</link>
+      <pubDate>Fri, 28 Jul 2017 09:32:45 -0400</pubDate>
+      
+      <guid>http://sahajamit.com/mystery-of-stale-element-reference-exception/</guid>
+      <description>If you are a Selenium developer than you would have surely faced this mysterious exception called &amp;ldquo;StaleElementReferenceException&amp;ldquo;
+Why exactly it occurs? This has been my favorite interview question since last many years and most of the time candidates gets confused it with NoSuchElementException. In case you have never worked on a dynamic ajax based application then there could be a chance that you have never faced it.
+Let&amp;rsquo;s go little deeper and unveils the mystery behind it.</description>
+    </item>
+    
+    <item>
+      <title>Mystery of StaleElementReferenceException in Selenium WebDriver</title>
+      <link>http://sahajamit.com/post/mystery-of-stale-element-reference-exception/</link>
+      <pubDate>Fri, 28 Jul 2017 09:32:45 -0400</pubDate>
+      
+      <guid>http://sahajamit.com/post/mystery-of-stale-element-reference-exception/</guid>
+      <description>If you are a Selenium developer than you would have surely faced this mysterious exception called &amp;ldquo;StaleElementReferenceException&amp;ldquo;
+Why exactly it occurs? This has been my favorite interview question since last many years and most of the time candidates gets confused it with NoSuchElementException. In case you have never worked on a dynamic ajax based application then there could be a chance that you have never faced it.
+Let&amp;rsquo;s go little deeper and unveils the mystery behind it.</description>
+    </item>
+    
+    <item>
+      <title>Integrating cucumber-JVM with TestNG</title>
+      <link>http://sahajamit.com/post/cucumber-jvm-with-testng/</link>
+      <pubDate>Sun, 28 Aug 2016 09:32:45 -0400</pubDate>
+      
+      <guid>http://sahajamit.com/post/cucumber-jvm-with-testng/</guid>
+      <description>Cucumber-JVM has a native integration with JUnit to run the BDD scenarios. Junit is a framework which is more popular among developers to support their unit testing. When we talk about function automation testing then TestNG is a better choice as it has more advanced features. In this blog I will be taking more about the Cucumber-JVM and TestNG Integration.
+With JUnit, the integration is quite straight forward, we simply need to create a test runner class like this.</description>
+    </item>
+    
+    <item>
+      <title>Mobile Emulation In Chromedriver</title>
+      <link>http://sahajamit.com/post/chromedriver-mobile_emulation/</link>
+      <pubDate>Sun, 28 Jun 2015 09:32:45 -0400</pubDate>
+      
+      <guid>http://sahajamit.com/post/chromedriver-mobile_emulation/</guid>
+      <description>ChromeDriver 2.11 release has the mobile emulation support using Chrome Dev Tools. I have been waiting for this feature since long.
+This feature is really handy to run your selenium tests against different mobile screen sizes with minimal setup. This does not provide you 100% emulation but atlest it will give you some fair idea about the compatibility of your application with different mobile screen size.
+This is how we can emulate different devices using the Java code.</description>
+    </item>
+    
+  </channel>
+</rss>
