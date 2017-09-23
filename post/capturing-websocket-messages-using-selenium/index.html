@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#2d4054">
     
 
-    <meta property="og:title" content="Mystery of StaleElementReferenceException in Selenium WebDriver">
+    <meta property="og:title" content="Capturing WebSocket Messages Using Selenium WebDriver">
 
     
     <meta property="og:locale" content="en_US" />
@@ -18,11 +18,11 @@
 
     
     <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2017-05-28">
+    <meta property="article:published_time" content="2017-07-28">
     
     <meta name="twitter:card" content="summary" />
 
-    <meta property="og:url" content="http://sahajamit.com/post/mystery-of-stale-element-reference-exception/">
+    <meta property="og:url" content="http://sahajamit.com/post/capturing-websocket-messages-using-selenium/">
     <meta property="og:site_name" content="Moving With Automation">
 
     
@@ -51,7 +51,7 @@
 
     
 
-    <title>Mystery of StaleElementReferenceException in Selenium WebDriver &middot; Moving With Automation</title>
+    <title>Capturing WebSocket Messages Using Selenium WebDriver &middot; Moving With Automation</title>
 
     
 
@@ -130,9 +130,9 @@
 
         <main>
             <header>
-                <h1>Mystery of StaleElementReferenceException in Selenium WebDriver</h1>
+                <h1>Capturing WebSocket Messages Using Selenium WebDriver</h1>
                 <p class="hg-post-date hg-muted">
-                    Published on: 28 May 2017
+                    Published on: 28 July 2017
                 </p>
                 <p class="hg-tag-list hg-muted">
                     
@@ -158,8 +158,16 @@
 <ul>
 <li>
 <ul>
-<li><a href="#page-factory-design-pattern">Page Factory Design Pattern:</a></li>
-<li><a href="#refreshing-the-element-whenever-it-gets-stale">Refreshing the Element whenever it gets stale:</a></li>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#how-to-capture-websocket-messages-from-your-selenium-code"><strong>&ldquo;How to capture WebSocket messages from your Selenium code ?&rdquo;</strong></a></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -168,76 +176,44 @@
                 </div>
                 
 
-<p>If you are a Selenium developer than you would have surely faced this mysterious exception called &ldquo;<strong>StaleElementReferenceException</strong>&ldquo;</p>
+<p>Recently, I was testing a web application which was using <strong><a href="https://www.websocket.org//">WebSocket</a></strong> as a networking layer to talk to the backend server. The messages are serialized using <strong><a href="https://avro.apache.org/">Avro</a></strong> and being sent over the web socket layer to the backend jetty server.</p>
 
-<p>Why exactly it occurs? This has been my favorite interview question since last many years and most of the time candidates gets confused it with NoSuchElementException. In case you have never worked on a dynamic ajax based application then there could be a chance that you have never faced it.</p>
+<p>For those who are not familiar with WebSocket messages, please go to this link in chrome &ldquo;<a href="https://web-demo.adaptivecluster.com/&quot;">https://web-demo.adaptivecluster.com/&quot;</a>. Once the pages is loaded, open the chrome devtool and navigate to the WS sub-tab uunder the network tab. Refer the below screenshot:</p>
 
-<p>Let&rsquo;s go little deeper and unveils the mystery behind it. When we run a simple code like this:</p>
+<p><img src="/img/ws-messages-1.png" alt="Example image" /></p>
 
-<pre><code class="language-java">WebElement searchBox = driver.findElement(By.cssSelector(&quot;input[name='q'&quot;));
-searchBox.sendKeys(&quot;Selenium&quot;);
+<p>The avro messages are quite complex and there was lot of logic involved to construct these messages. The UI code was written in <a href="https://facebook.github.io/react/"><strong>Reactjs</strong></a> and <a href="https://www.typescriptlang.org/"><strong>Typescript</strong></a> to build these messages and it was essential to test the correctness of these messages.</p>
+
+<p>As all our UI automation was developed using Selenium, so we decided to use the same selenium code to validate these messages.</p>
+
+<p>The whole problem boils down to the fact that:</p>
+
+<h5 id="how-to-capture-websocket-messages-from-your-selenium-code"><strong>&ldquo;How to capture WebSocket messages from your Selenium code ?&rdquo;</strong></h5>
+
+<p>We do not want to involve any external web proxy library like BrowserMob/Fiddler to address this problem so we decided to explore if ChromeDriver can do this task without any help of external libraries.</p>
+
+<p>After searching few links on google, we found this <a href="https://sites.google.com/a/chromium.org/chromedriver/logging/performance-log">link</a> where it is shown, how to capture the browser network data using chromedriver.</p>
+
+<p>We tried this solution and it worked. Below is the final code where I have shown how we captured both inbound/outbound messages on one of the demo site &ldquo;<strong><a href="https://web-demo.adaptivecluster.com/">https://web-demo.adaptivecluster.com/</a></strong>&ldquo;</p>
+
+<p><em>The code uses Java 8 and following maven dependencies</em></p>
+
+<pre><code class="language-xml">    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;
+            &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
+            &lt;version&gt;3.5.3&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.json&lt;/groupId&gt;
+            &lt;artifactId&gt;json&lt;/artifactId&gt;
+            &lt;version&gt;20170516&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
 </code></pre>
 
-<p>When WebDriver executes the above code then it assigns an internal id (refer the below image) to every web element and it refers this id to interact with that element.</p>
-
-<p><img src="/img/stale-element-1.png" alt="Example image" /></p>
-
-<p>Now, let&rsquo;s assume when you have fetched the element and before doing any action on it, something got refreshed on your page. It could be the entire page refresh or some internal ajax call which has refreshed a section of the dom where your element falls. In this scenario the internal id which webdriver was using has become stale, so now for every operation on this WebElement, we will get StaleElementReferenceException.</p>
-
-<p>To overcome this problem, the only choice we have is to re-fetch the element from Dom and this time WebDriver will assign a different Id to this element.</p>
-
-<p>So from the above example what we understood is that if we are working with an AJAX-heavy application where page&rsquo;s dom can get changed on every interaction then it is wise to fetch the web elements every time when we are operating on them. There are couple of ways to make sure, the element always gets refreshed before we use it:</p>
-
-<h2 id="page-factory-design-pattern">Page Factory Design Pattern:</h2>
-
-<p>Please refer the below code.</p>
-
-<pre><code class="language-java">GoogleSearchPage page = PageFactory.initElements(driver,GoogleSearchPage.class);
-</code></pre>
-
-<pre><code class="language-java">public class GoogleSearchPage {
-    @FindBy(how = How.NAME, using = &quot;q&quot;)
-    private WebElement searchBox;
-
-    public void searchFor(String text) {
-        searchBox.sendKeys(text);
-    }
-</code></pre>
-
-<p>In the above example, a proxy would be configured for every Web Element when the page gets initialised. Every time we use a WebElement it will go and find it again so we shouldn&rsquo;t see StaleElementException. This approach would solve your stale element problem at most of the places except some corner cases which I will cover in the next approach.</p>
-
-<h2 id="refreshing-the-element-whenever-it-gets-stale">Refreshing the Element whenever it gets stale:</h2>
-
-<p>When you work on a modern, reactive, real-time application developed in technologies like Angularjs/Reactjs which has hell lot of data and there is a persistent web-socket connection which keep pushing data to your browser and which makes your dom to change.  Let&rsquo;s take an example of a stock exchange where there a data grid which displays real-time information and data keeps changing too frequently. In this case, whenever the data gets changed at server-side, the changes will be pushed automatically to your UI grid and depending on your data your respective rows or cells will get stale.</p>
-
-<p>Here, Page factory can not help as most of your grid elements are dynamic and you cannot configure their locators while initiliazing your page. Also if you have created your own data model to prase data, than it is difficult to configure Page Factory accross all your data model classes.</p>
-
-<p>To deal with this problem I decided to develop a generic method to refresh the element in case it gets stale. To refresh an element, we first need to figure out its By locator but Selenium API has not exposed anything to re-construct the locator from an existing web element. I was fortunate that they have exposed a toString method on WebElement which print all the locators being used to build that element. Let&rsquo;s see the below example where we are finding an element which is a child of another element:</p>
-
-<pre><code class="language-java">WebElement elem1 = driver.findElement(By.xpath(&quot;//div[@id='searchform']&quot;));
-WebElement elem2 = elem1.findElement(By.cssSelector(&quot;input[name='q'&quot;));
-System.out.println(elem2.toString());
-</code></pre>
-
-<p><strong>Output of the above code would be:</strong></p>
-
-<pre><code>[[[[ChromeDriver: chrome on XP (bd6a0d83229c67d5f7e6060b1bd768e9)] -&gt; xpath: //div[@id='searchform']]] -&gt; css selector: input[name='q']
-</code></pre>
-
-<p>Now we have to apply all the reverse-engineering to build the element again from this String. Thanks to <a href="https://docs.oracle.com/javase/tutorial/reflect/">Reflection API in Java</a> which can help us to dynamically execute the code to build the element.</p>
-
-<p><strong>Here is the final implementation:</strong></p>
-
-<pre><code class="language-java">WebElement refreshedElement = StaleElementUtils.refreshElement(elem2);
-</code></pre>
-
-<p>This refreshElement method will check if the element is stale then it will re-fetch the element from the dom. So for all the data grid elements which can get stale anytime, we can use this method as a precautionary measure to avoid stale element exception.</p>
-
-<p>Please feel free to share your thoughts on my approach and would love to know, how you have handled this interesting exception.</p>
-
-<p>Here is the complete <a href="https://gist.github.com/sahajamit/f94d0094f35cd63deb21c45328ab5b47">code</a>:</p>
-
-<script src="//gist.github.com/sahajamit/f94d0094f35cd63deb21c45328ab5b47.js"></script>
+<p><strong>Code:</strong>
+<script src="//gist.github.com/sahajamit/c2d6827736f2b267a8d08c41e559ad24.js"></script></p>
 
             </article>
         </main>
@@ -246,8 +222,8 @@ System.out.println(elem2.toString());
 <div class="pure-g hg-bottom-nav">
     <div class="pure-u-9-24">
         
-        <a href="http://sahajamit.com/post/cucumber-jvm-with-testng/">
-            Previous: Integrating cucumber-JVM with TestNG
+        <a href="http://sahajamit.com/post/mystery-of-stale-element-reference-exception/">
+            Previous: Mystery of StaleElementReferenceException in Selenium WebDriver
         </a>
         
     </div>
@@ -257,10 +233,6 @@ System.out.println(elem2.toString());
         </a>
     </div>
     <div class="pure-u-9-24">
-        
-        <a href="http://sahajamit.com/post/capturing-websocket-messages-using-selenium/">
-            Next: Capturing WebSocket Messages Using Selenium WebDriver
-        </a>
         
     </div>
 </div>
@@ -335,8 +307,16 @@ System.out.println(elem2.toString());
 <ul>
 <li>
 <ul>
-<li><a href="#page-factory-design-pattern">Page Factory Design Pattern:</a></li>
-<li><a href="#refreshing-the-element-whenever-it-gets-stale">Refreshing the Element whenever it gets stale:</a></li>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#how-to-capture-websocket-messages-from-your-selenium-code"><strong>&ldquo;How to capture WebSocket messages from your Selenium code ?&rdquo;</strong></a></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
