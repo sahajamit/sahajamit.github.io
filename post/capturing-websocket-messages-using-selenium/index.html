@@ -34,6 +34,8 @@
     
     <meta property="og:tags" content="webdriver">
     
+    <meta property="og:tags" content="websocket">
+    
 
     
     <meta name="twitter:creator" content="@sahajamit">
@@ -145,6 +147,8 @@
     
         <a href="http://sahajamit.com/tags/webdriver"><span class="hg-tag">webdriver</span></a>
     
+        <a href="http://sahajamit.com/tags/websocket"><span class="hg-tag">websocket</span></a>
+    
 
                 </p>
                 
@@ -178,7 +182,7 @@
 
 <p>Recently, I was testing a web application which was using <strong><a href="https://www.websocket.org//">WebSocket</a></strong> as a networking layer to talk to the backend server. The messages are serialized using <strong><a href="https://avro.apache.org/">Avro</a></strong> and being sent over the web socket layer to the backend jetty server.</p>
 
-<p>For those who are not familiar with WebSocket messages, please go to this link in chrome &ldquo;<a href="https://web-demo.adaptivecluster.com/&quot;">https://web-demo.adaptivecluster.com/&quot;</a>. Once the pages is loaded, open the chrome devtool and navigate to the WS sub-tab uunder the network tab. Refer the below screenshot:</p>
+<p>For those who are not familiar with WebSocket messages, please go to this link in chrome &ldquo;<a href="https://web-demo.adaptivecluster.com/&quot;">https://web-demo.adaptivecluster.com/&quot;</a>. Once the page is loaded, open the chrome devtool and navigate to the WS sub-tab under the network tab. Refer the below screenshot:</p>
 
 <p><img src="/img/ws-messages-1.png" alt="Example image" /></p>
 
@@ -190,7 +194,7 @@
 
 <h5 id="how-to-capture-websocket-messages-from-your-selenium-code"><strong>&ldquo;How to capture WebSocket messages from your Selenium code ?&rdquo;</strong></h5>
 
-<p>We do not want to involve any external web proxy library like BrowserMob/Fiddler to address this problem so we decided to explore if ChromeDriver can do this task without any help of external libraries.</p>
+<p>We did not want to involve any external web proxy library like BrowserMob/Fiddler to address this problem so we decided to explore if ChromeDriver can do this task without any help of external libraries.</p>
 
 <p>After searching few links on google, we found this <a href="https://sites.google.com/a/chromium.org/chromedriver/logging/performance-log">link</a> where it is shown, how to capture the browser network data using chromedriver.</p>
 
